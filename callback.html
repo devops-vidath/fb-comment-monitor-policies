@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FB Comment Monitor - OAuth Callback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 40px;
+        }
+        h1 { color: #1877f2; }
+        .status {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .success { color: #4CAF50; }
+        .info { color: #2196F3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FB Comment Monitor</h1>
+        <div class="status">
+            <p class="info">✓ Authentication successful!</p>
+            <p>Please return to the desktop application.</p>
+        </div>
+        <p style="font-size: 14px; opacity: 0.7;">
+            This page is only used for OAuth verification.<br>
+            If you reached this page by mistake, you can close it.
+        </p>
+    </div>
+    
+    <script>
+        // Optional: Display the auth code if present
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const error = urlParams.get('error');
+        
+        if (error) {
+            document.querySelector('.status').innerHTML = 
+                '<p style="color: #f44336;">❌ Authentication failed: ' + error + '</p>';
+        } else if (code) {
+            document.querySelector('.status').innerHTML += 
+                '<p style="font-size: 12px; opacity: 0.6;">Auth code received. Close this window.</p>';
+        }
+    </script>
+</body>
+</html>
